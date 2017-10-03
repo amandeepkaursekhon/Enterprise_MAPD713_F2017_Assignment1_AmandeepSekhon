@@ -57,6 +57,7 @@ server
 
   // Maps req.body to req.params so there is no switching between them
   .use(restify.bodyParser())
+  
 
 // Get all users in the system
 server.get('/sendGet', function (req, res, next) 
