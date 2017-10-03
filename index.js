@@ -188,7 +188,8 @@ server.put('/products/:id', function (req, res, next) {
 // Delete All products
 server.del('sendDelete', function (req, res, next) {
   
-     // reset the given collection
+     
+  // reset given collection
      productsSave = require('save')('products')
     
      // Send a 200 OK response
