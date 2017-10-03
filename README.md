@@ -1,2 +1,0 @@
-# Enterprise_Techs_MAPD713_F2017_Assignment1_AmandeepSekhon
-# assignment1
