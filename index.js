@@ -173,6 +173,11 @@ server.put('/products/:id', function (req, res, next) {
 		productname: req.params.productname,
 		price: req.params.price
 	}
+  var newproduct = {
+		_id: req.params.id,
+		productname: req.params.productname,
+		price: req.params.price
+	}
 
   // Update the user with the persistence engine
   productsSave.update(newproduct, function (error, product) {
