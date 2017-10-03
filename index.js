@@ -18,7 +18,7 @@ var product_data_JSON = JSON.parse(data);
 
 /*----------------------------------------------------------------------------------------------*/
 
-//load the modules
+//load modules
 
 var http = require('http');
 var url = require('url');
@@ -70,7 +70,7 @@ server.get('/sendGet', function (req, res, next)
   productsSave.find({}, function (error, products) {
 
     // Return all of the users in the system
-    res.send(products)
+    res.send(product_data_JSON)
   })
 })
 // Get all users in the system
@@ -128,25 +128,21 @@ server.post('/sendPost', function (req, res, next) {
 	}
 
 
-  //Writing data in JSON file
-
-  product_data_JSON[req.params.productname] = req.params.price;
   
-    var write_data = JSON.stringify(product_data_JSON,null,2);
-
-    fs.writeFile(filename,write_data,finished);
-
-    function finished(err) {console.log('Data stored in json file');}
-
-  // If there are any errors, pass them to next in the correct format
-  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
-
-  // Send the user if no issues
-  res.send(201, product)
-})
-
   // Create the user using the persistence engine
   productsSave.create( newproduct, function (error, product) {
+
+
+//Writing data in the JSON file
+
+product_data_JSON[req.params.productname] = req.params.price;
+
+  var write_data = JSON.stringify(product_data_JSON,null,2);
+
+  fs.writeFile(filename,write_data,finished);
+
+  function finished(err) {console.log('Data stored in json file');}
+
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
@@ -154,6 +150,7 @@ server.post('/sendPost', function (req, res, next) {
     // Send the user if no issues
     res.send(201, product)
   })
+})
 
 // Update a user by their id
 server.put('/products/:id', function (req, res, next) {
@@ -171,9 +168,9 @@ server.put('/products/:id', function (req, res, next) {
   var newproduct = {
 		_id: req.params.id,
 		productname: req.params.productname,
-		pricee: req.params.price
+		price: req.params.price
 	}
- 
+
   // Update the user with the persistence engine
   productsSave.update(newproduct, function (error, product) {
 
@@ -192,6 +189,7 @@ server.del('sendDelete', function (req, res, next) {
   // reset given collection
      productsSave = require('save')('products')
     
+     
      // Send a 200 OK response
      res.send('All records deleted')
 })
