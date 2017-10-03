@@ -18,7 +18,7 @@ var product_data_JSON = JSON.parse(data);
 
 /*----------------------------------------------------------------------------------------------*/
 
-//load modules
+//load the modules
 
 var http = require('http');
 var url = require('url');
