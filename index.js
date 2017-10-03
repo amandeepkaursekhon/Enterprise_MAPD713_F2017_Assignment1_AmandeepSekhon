@@ -1,3 +1,4 @@
+
 /*  MAPD713 -Enterprise Technologies for Mobile Platforms */
 /* Amandeep Kaur Sekhon -29/09/2017 */
 
@@ -6,12 +7,13 @@
 // Json server
 
 var SERVER_NAME = 'user-api'
-var PORT = 8000;
+var PORT = 3000;
 var HOST = '127.0.0.1';
-/*var fs = require('fs');
-var data = fs.readFileSync('storagecode.json');
-var words=JSON.parse(data);
-console.log(words);*/
+//Read data from json file
+var filename = 'storagecode.json';
+var fs = require('fs');
+var data = fs.readFileSync(filename);
+var product_data_JSON = JSON.parse(data);
 
 /*----------------------------------------------------------------------------------------------*/
 
@@ -31,17 +33,12 @@ var postcounter = 0;
 var restify = require('restify')
 
   // Get a persistence engine for the users
-<<<<<<< HEAD
   , productsSave = require('save')('products')
-=======
-  , usersSave = require('save')('users')
->>>>>>> first commit
 
   // Create the restify server
   , server = restify.createServer({ name: SERVER_NAME})
 
   server.listen(PORT, HOST, function () {
-<<<<<<< HEAD
   console.log('Server is listening at - ' + HOST + ":" +PORT)
   console.log('Endpoints :' + "http://" + HOST+ ":" + PORT + "/" +"sendGet method: GET")
   console.log("http://" + HOST + ":" + PORT + "/" +"sendGetById method: GET")
@@ -51,12 +48,6 @@ var restify = require('restify')
   //console.log("http://" + host + ":" + port + "sendDeleteById method: GET")
   console.log(' /products/:id')
   
-=======
-  console.log('Server %s listening at %s', server.name, server.url)
-  console.log('Resources:')
-  console.log(' /users')
-  console.log(' /users/:id')
->>>>>>> first commit
 })
 
 server
@@ -67,7 +58,6 @@ server
   .use(restify.bodyParser())
 
 // Get all users in the system
-<<<<<<< HEAD
 server.get('/sendGet', function (req, res, next) 
 
 {
@@ -80,15 +70,6 @@ server.get('/sendGet', function (req, res, next)
 
     // Return all of the users in the system
     res.send(products)
-=======
-server.get('/users', function (req, res, next) {
-
-  // Find every entity within the given collection
-  usersSave.find({}, function (error, users) {
-
-    // Return all of the users in the system
-    res.send(users)
->>>>>>> first commit
   })
 })
 // Get all users in the system
@@ -109,19 +90,11 @@ server.get('/products', function (req, res, next)
 
 
 // Get a single user by their user id
-<<<<<<< HEAD
 server.get('/products/:id', function (req, res, next) {
 
   // Find a single user by their id within save
   productsSave.findOne({ _id: req.params.id }, function (error, product) {
 productsSave.findOne
-=======
-server.get('/users/:id', function (req, res, next) {
-
-  // Find a single user by their id within save
-  usersSave.findOne({ _id: req.params.id }, function (error, user) {
-
->>>>>>> first commit
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
 
@@ -136,14 +109,9 @@ server.get('/users/:id', function (req, res, next) {
 })
 
 // Create a new user
-<<<<<<< HEAD
 server.post('/sendPost', function (req, res, next) {
   console.log(' > sendPost : Sending response')
   console.log("processed response counter" + ++postcounter )
-=======
-server.post('/users', function (req, res, next) {
-
->>>>>>> first commit
   // Make sure name is defined
   if (req.params.productname === undefined ) {
     // If there are any errors, pass them to next in the correct format
@@ -171,7 +139,6 @@ server.post('/users', function (req, res, next) {
       msg="score is required"
     }
   }
-
   else
   {
     words [word] = score;
@@ -186,16 +153,11 @@ reply = {
   status: "success"
 }
 response.send(reply);
-
 }
 */
 
   // Create the user using the persistence engine
-<<<<<<< HEAD
   productsSave.create( newproduct, function (error, product) {
-=======
-  usersSave.create( newUser, function (error, user) {
->>>>>>> first commit
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
@@ -205,11 +167,7 @@ response.send(reply);
   })
 
 // Update a user by their id
-<<<<<<< HEAD
 server.put('/products/:id', function (req, res, next) {
-=======
-server.put('/users/:id', function (req, res, next) {
->>>>>>> first commit
 
   // Make sure name is defined
   if (req.params.productname === undefined ) {
@@ -228,11 +186,7 @@ server.put('/users/:id', function (req, res, next) {
 	}
 
   // Update the user with the persistence engine
-<<<<<<< HEAD
   productsSave.update(newproduct, function (error, product) {
-=======
-  usersSave.update(newUser, function (error, user) {
->>>>>>> first commit
 
     // If there are any errors, pass them to next in the correct format
     if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
@@ -253,7 +207,6 @@ server.del('sendDelete', function (req, res, next) {
 })
 })
 // Delete user with the given id
-<<<<<<< HEAD
 server.del('/products/:id', function (req, res, next) {
   
     // Delete the user with the persistence engine
@@ -265,17 +218,4 @@ server.del('/products/:id', function (req, res, next) {
       // Send a 200 OK response
       res.send()
     })
-=======
-server.del('/users/:id', function (req, res, next) {
-
-  // Delete the user with the persistence engine
-  usersSave.delete(req.params.id, function (error, user) {
-
-    // If there are any errors, pass them to next in the correct format
-    if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
-
-    // Send a 200 OK response
-    res.send()
->>>>>>> first commit
   })
-  

@@ -1,0 +1,26 @@
+{
+    "name": "assignment1",
+    "version": "1.0.0",
+    "description": "Assignment 1-09/29/2017",
+    "main": "index.js",
+    "scripts": {
+        "test": "grunt validate --verbose",
+        "start": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/amandeepkaursekhon/Enterprise_Techs_MAPD713_F2017_Assignment1_AmandeepSekhon"
+    },
+    "keywords": [
+        "assignment1",
+        "MAPD",
+        "713"
+    ],
+    "author": "Amandeep sekhon",
+    "license": "ISC",
+    "private": true,
+    "dependencies": {
+        "restify": "^4.1.1",
+        "save": "^2.3.0"
+    }
+}
