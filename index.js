@@ -185,7 +185,7 @@ server.put('/products/:id', function (req, res, next) {
   })
 })
 
-// Delete All products
+// Delete All the products
 server.del('sendDelete', function (req, res, next) {
   
      // reset the given collection
