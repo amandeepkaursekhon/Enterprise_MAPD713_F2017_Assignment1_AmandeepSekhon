@@ -171,7 +171,7 @@ server.put('/products/:id', function (req, res, next) {
   var newproduct = {
 		_id: req.params.id,
 		productname: req.params.productname,
-		pricee: req.params.price
+		price: req.params.price
 	}
  
   // Update the user with the persistence engine
