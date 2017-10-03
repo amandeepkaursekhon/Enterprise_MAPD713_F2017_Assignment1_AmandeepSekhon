@@ -15,6 +15,7 @@ var fs = require('fs');
 var data = fs.readFileSync(filename);
 var product_data_JSON = JSON.parse(data);
 
+
 /*----------------------------------------------------------------------------------------------*/
 
 //load modules
@@ -127,34 +128,22 @@ server.post('/sendPost', function (req, res, next) {
 	}
 
 
-  /*function addWord(request, response)
-{
-  var data = request.params;
-  var word = data.word;
-  var score = Number(data.score);
-  var reply;
-  if(!score)
-  {
-    reply = { 
-      msg="score is required"
-    }
-  }
-  else
-  {
-    words [word] = score;
-var data = JSON.stringify(word,null,2);
-fs.writeFile(storagecode.json,data,finished);
-function finished (err)
-{
-  console.log('all set.');
-reply = {
-  word :word,
-  score :score,
-  status: "success"
-}
-response.send(reply);
-}
-*/
+  //Writing data in JSON file
+
+  product_data_JSON[req.params.productname] = req.params.price;
+  
+    var write_data = JSON.stringify(product_data_JSON,null,2);
+
+    fs.writeFile(filename,write_data,finished);
+
+    function finished(err) {console.log('Data stored in json file');}
+
+  // If there are any errors, pass them to next in the correct format
+  if (error) return next(new restify.InvalidArgumentError(JSON.stringify(error.errors)))
+
+  // Send the user if no issues
+  res.send(201, product)
+})
 
   // Create the user using the persistence engine
   productsSave.create( newproduct, function (error, product) {
@@ -204,7 +193,6 @@ server.del('sendDelete', function (req, res, next) {
     
      // Send a 200 OK response
      res.send('All records deleted')
-})
 })
 // Delete user with the given id
 server.del('/products/:id', function (req, res, next) {
